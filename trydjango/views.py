@@ -4,6 +4,7 @@ To render html web pages
 import random
 from django.http import HttpResponse
 
+from articles.models import Article
 
 
 def home_view(request):
@@ -12,17 +13,17 @@ def home_view(request):
     Return HTML as a response (We pick to return the response)
     """
     name = "Justin" # hard coded
-    number = random.randint(10, 1233123) # pseudo random
+    random_id = random.randint(1, 4) # pseudo random
+    
     # from the database??
-    # article_name =
-    # article_content = 
+    article_obj = Article.objects.get(id=random_id)
 
     # Django Templates
     H1_STRING = f"""
-    <h1>Hello {name} - {number}!</h1>
+    <h1>{article_obj.title} (id: {article_obj.id})!</h1>
     """
     P_STRING = f"""
-    <p>Hi {name} - {number}!</p>
+    <p>{article_obj.content}!</p>
     """
     HTML_STRING = H1_STRING + P_STRING
     return HttpResponse(HTML_STRING)
