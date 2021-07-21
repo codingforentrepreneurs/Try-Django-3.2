@@ -6,8 +6,7 @@ from django.http import HttpResponse
 from django.template.loader import render_to_string
 from articles.models import Article
 
-
-def home_view(request):
+def home_view(request, *args, **kwargs):
     """
     Take in a request (Django sends request)
     Return HTML as a response (We pick to return the response)
