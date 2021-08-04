@@ -1,5 +1,6 @@
 from django.db import models
 from django.db.models.signals import pre_save, post_save
+from django.urls import reverse
 from django.utils import timezone
 # Create your models here.
 
@@ -16,7 +17,8 @@ class Article(models.Model):
     publish = models.DateField(auto_now_add=False, auto_now=False, null=True, blank=True)
 
     def get_absolute_url(self):
-        return f'/articles/{self.slug}/'
+        # return f'/articles/{self.slug}/'
+        return reverse("article-detail", kwargs={"slug": self.slug})
 
     def save(self, *args, **kwargs):
         # obj = Article.objects.get(id=1)
