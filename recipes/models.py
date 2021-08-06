@@ -1,7 +1,7 @@
 import pint
 from django.conf import settings
 from django.db import models
-
+from django.urls import reverse
 from .utils import number_str_to_float
 from .validators import validate_unit_of_measure
 """
@@ -25,7 +25,7 @@ class Recipe(models.Model):
     active = models.BooleanField(default=True)
 
     def get_absolute_url(self):
-        return "/pantry/recipes/"
+        return reverse("recipes:detail", kwargs={"id": self.id})
 
 class RecipeIngredient(models.Model):
     recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)

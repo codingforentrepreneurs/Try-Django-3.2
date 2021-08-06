@@ -39,7 +39,7 @@ class Article(models.Model):
 
     def get_absolute_url(self):
         # return f'/articles/{self.slug}/'
-        return reverse("article-detail", kwargs={"slug": self.slug})
+        return reverse("articles:detail", kwargs={"slug": self.slug})
 
     def save(self, *args, **kwargs):
         # obj = Article.objects.get(id=1)
