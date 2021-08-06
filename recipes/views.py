@@ -7,7 +7,7 @@ from .models import Recipe
 
 @login_required
 def recipe_list_view(request):
-    qs = Recipe.objects.fitler(user=request.user)
+    qs = Recipe.objects.filter(user=request.user)
     context = {
         "object_list": qs
     }
