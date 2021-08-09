@@ -14,9 +14,9 @@
         {{ form.as_p }}
 
 
-        {% if form_2 %}
+        {% if formset %}
         <h3>Ingredients</h3>
-        {{ form_2.as_p }}
+        {{ formset.as_p }}
         {% endif %}
         <button style='margin-top:10px;' type='submit' >Save</button>
     </form>
