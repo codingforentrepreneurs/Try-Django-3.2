@@ -3,7 +3,11 @@
 
 {% block content %}
 
-
+<style>
+    .ingredient-form {
+        border-bottom: 1px solid black;
+    }
+</style>
 {% if message %}
 
 <p>{{ message }}</p>
@@ -11,12 +15,25 @@
 <div style='margin-top:30px;'>
     <form action='.' method="POST">
         {% csrf_token %}
-        {{ form.as_p }}
+       {% for field in form %}
+       <div class='{% if field.field.required %}{{ form.required_css_class }}{%endif%}'>
+        {{ field.errors }}   
+        {{ field.label_tag }} {{ field }}
+        {% if field.help_text %}
+            <p class="help">{{ field.help_text|safe }}</p>
+        {% endif %}
+        </div>
+       {% endfor %}
 
 
         {% if formset %}
         <h3>Ingredients</h3>
-        {{ formset.as_p }}
+        {{ formset.management_form }}
+        {% for form in formset %}
+                <div class='ingredient-form'>
+                    {{ form.as_p }}
+                </div>
+        {% endfor %}
         {% endif %}
         <button style='margin-top:10px;' type='submit' >Save</button>
     </form>
