@@ -1,0 +1,92 @@
+[
+{
+    "model": "recipes.recipe",
+    "pk": 1,
+    "fields": {
+        "user": 1,
+        "name": "Grilled Chicken Tacos",
+        "description": "here is my description",
+        "directions": "here is my Directions",
+        "timestamp": "2021-08-05T17:09:53.720Z",
+        "updated": "2021-08-10T18:35:23.157Z",
+        "active": true
+    }
+},
+{
+    "model": "recipes.recipe",
+    "pk": 2,
+    "fields": {
+        "user": 1,
+        "name": "Roast Beef",
+        "description": "",
+        "directions": "",
+        "timestamp": "2021-08-06T17:53:32.994Z",
+        "updated": "2021-08-11T15:04:05.658Z",
+        "active": true
+    }
+},
+{
+    "model": "recipes.recipeingredient",
+    "pk": 1,
+    "fields": {
+        "recipe": 1,
+        "name": "Grilled Chicken",
+        "description": "",
+        "quantity": "24",
+        "quantity_as_float": 24.0,
+        "unit": "ounces",
+        "directions": "",
+        "timestamp": "2021-08-05T17:21:01.324Z",
+        "updated": "2021-08-10T18:35:23.159Z",
+        "active": true
+    }
+},
+{
+    "model": "recipes.recipeingredient",
+    "pk": 2,
+    "fields": {
+        "recipe": 1,
+        "name": "Salsa",
+        "description": "",
+        "quantity": "8",
+        "quantity_as_float": 8.0,
+        "unit": "ounces",
+        "directions": "",
+        "timestamp": "2021-08-05T21:48:42.117Z",
+        "updated": "2021-08-10T18:35:23.161Z",
+        "active": true
+    }
+},
+{
+    "model": "recipes.recipeingredient",
+    "pk": 3,
+    "fields": {
+        "recipe": 1,
+        "name": "Cheese",
+        "description": "",
+        "quantity": "4",
+        "quantity_as_float": 4.0,
+        "unit": "ounces",
+        "directions": "",
+        "timestamp": "2021-08-05T22:08:13.191Z",
+        "updated": "2021-08-10T18:35:23.162Z",
+        "active": true
+    }
+},
+{
+    "model": "recipes.recipeingredient",
+    "pk": 21,
+    "fields": {
+        "recipe": 2,
+        "name": "Penne Pasta",
+        "description": null,
+        "quantity": "5000",
+        "quantity_as_float": 5000.0,
+        "unit": "pounds",
+        "directions": null,
+        "timestamp": "2021-08-10T19:18:05.309Z",
+        "updated": "2021-08-11T15:04:05.660Z",
+        "active": true
+    }
+}
+]
