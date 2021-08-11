@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_htmx',
     'articles',
-    'recipes'
+    'recipes',
+    'search',
 ]
 
 MIDDLEWARE = [
