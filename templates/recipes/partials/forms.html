@@ -1,4 +1,5 @@
-<form action='.' method="POST" hx-post='.' hx-swap='outerHTML'>
+<div id='recipe-container'>
+<form action='.' method="POST" hx-post='.' hx-swap='outerHTML' hx-trigger='change delay:500ms, submit'>
     {% csrf_token %}
     
    {% for field in form %}
@@ -19,3 +20,4 @@
     <p>{{ message }}</p>
     {% endif %}
 </form>
+</div>
