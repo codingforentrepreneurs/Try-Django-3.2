@@ -1,5 +1,5 @@
 <div id='recipe-container'>
-<form action='.' method="POST" hx-post='.' hx-swap='outerHTML' hx-trigger='change delay:500ms, submit'>
+<form action='.' method="POST" hx-post='.' hx-swap='outerHTML' hx-trigger='{% if form.instance.id %}change delay:500ms,{% endif %} submit'>
     {% csrf_token %}
     
    {% for field in form %}
