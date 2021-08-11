@@ -18,14 +18,17 @@
 
 <script>
     
-    const addMoreBtn = document.getElementById('add-more')
-    const totalNewForms = document.getElementById('id_form-TOTAL_FORMS')
     
-    addMoreBtn.addEventListener('click', add_new_form)
+    document.addEventListener('click', (event)=>{
+        if (event.target.id == 'add-more') {
+            add_new_form(event)
+        }
+    })
     function add_new_form(event) {
         if (event) {
             event.preventDefault()
         }
+        const totalNewForms = document.getElementById('id_form-TOTAL_FORMS')
         const currentIngredientForms = document.getElementsByClassName('ingredient-form')
         const currentFormCount = currentIngredientForms.length // + 1
         const formCopyTarget = document.getElementById('ingredient-form-list')
