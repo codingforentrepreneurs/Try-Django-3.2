@@ -1,4 +1,12 @@
-<h1>{{ object.name }} {% if object.get_edit_url %}<small><a href='{{ object.get_edit_url }}'>Edit</a></small>{% endif %}</h1>
+<h1>{{ object.name }}</h1>
+{% if object.get_edit_url %}
+<small>
+    <a href='{{ object.get_edit_url }}'>Edit</a> 
+    <a href='{{ object.get_delete_url }}'>Delete</a> 
+</small>
+
+
+{% endif %}
 <p>{{ object.description }}</p>
 <p>{{ object.directions }}</p>
 

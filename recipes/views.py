@@ -27,6 +27,33 @@ def recipe_detail_view(request, id=None):
 
 
 @login_required
+def recipe_delete_view(request, id=None):
+    obj = get_object_or_404(Recipe, id=id, user=request.user)
+    if request.method == "POST":
+        obj.delete()
+        success_url = reverse('recipes:list')
+        return redirect(success_url)
+    context = {
+        "object": obj
+    }
+    return render(request, "recipes/delete.html", context)
+
+
+@login_required
+def recipe_incredient_delete_view(request, parent_id=None, id=None):
+    obj = get_object_or_404(RecipeIngredient, recipe__id=parent_id, id=id, recipe__user=request.user)
+    if request.method == "POST":
+        obj.delete()
+        success_url = reverse('recipes:detail', kwargs={"id": parent_id})
+        return redirect(success_url)
+    context = {
+        "object": obj
+    }
+    return render(request, "recipes/delete.html", context)
+
+
+
+@login_required
 def recipe_detail_hx_view(request, id=None):
     if not request.htmx:
         raise Http404
