@@ -1,24 +1,15 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
     <head>
         <script src="https://unpkg.com/htmx.org@1.5.0"></script>
-        <style>
-            .htmx-indicator {
-                display: none;
-            }
-            .htmx-request .htmx-indicator {
-                display: inline;
-            }
-            .htmx-inverted-indicator {
-                display: inline;
-            }
-            .htmx-request .htmx-inverted-indicator {
-                display: none;
-            }
-        </style>
+        <link rel='stylesheet' href='{% static "recipes/recipes-htmx.css" %}' />
     </head>
     <body>
         <h1>Hello World</h1>
+
+        {% static "recipes/recipes-htmx.css" %}
+        
         {% include 'search/search-form.html' %}
 
         {% block content %}
