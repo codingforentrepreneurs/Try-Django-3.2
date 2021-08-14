@@ -4,3 +4,5 @@ psycopg2-binary
 django-dotenv
 django-htmx
 pint
+django-storages
+boto3
