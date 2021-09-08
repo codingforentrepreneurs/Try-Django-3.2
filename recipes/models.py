@@ -80,6 +80,8 @@ def recipe_ingredient_image_upload_handler(instance, filename):
 class RecipeIngredientImage(models.Model):
     recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
     image = models.ImageField(upload_to=recipe_ingredient_image_upload_handler) # path/to/the/actual/file.png
+    extracted = models.JSONField(blank=True, null=True)
+    
     # image
     # extracted_text
 

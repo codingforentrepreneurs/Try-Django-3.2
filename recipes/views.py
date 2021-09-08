@@ -6,6 +6,7 @@ from django.shortcuts import redirect, render, get_object_or_404
 
 from .forms import RecipeForm, RecipeIngredientForm, RecipeIngredientImageForm
 from .models import Recipe, RecipeIngredient
+from .services import extract_text_via_ocr_service
 # CRUD -> Create Retrieve Update & Delete
 
 @login_required
@@ -183,4 +184,12 @@ def recipe_ingredient_image_upload_view(request, parent_id=None):
         obj.recipe = parent_obj
         # obj.recipe_id = parent_id
         obj.save()
+        # send image file -> microservice api
+        # microservice api -> data about the file
+        # cloud providers $$
+        result = extract_text_via_ocr_service(obj.image)
+        obj.extracted = result
+        obj.save()
+        # print(obj.extracted)
+
     return render(request, template_name, {"form":form})
