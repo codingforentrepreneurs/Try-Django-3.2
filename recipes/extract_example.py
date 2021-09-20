@@ -3,22 +3,6 @@ from typing import List
 from pint import UnitRegistry
 
 def number_str_to_float(amount_str:str) -> (any, bool):
-    """
-    Take in an amount string to return float (if possible).
-    
-    Valid string returns:
-    Float
-    Boolean -> True
-
-    Invalid string Returns
-    Original String
-    Boolean -> False
-    
-    Examples:
-    1 1/2 -> 1.5, True
-    32 -> 32.0, True
-    Abc -> Abc, False
-    """
     success = False
     number_as_float = amount_str
     try:
@@ -30,6 +14,9 @@ def number_str_to_float(amount_str:str) -> (any, bool):
     return number_as_float, success
 
 
+extracted = {"results": ["1 pound chicken breasts cut into bite", "size pieces", "", "2 tbsp olive oil", "", "2 clove garlic crushed or minced", "", "1 tbsp chili powder", "", "1/2 teaspoon ground cumin", "", "1/4 teaspoon onion or garlic powder", "1/4 teaspoon kosher salt", "", "1 tbsp olive oil", "", "squeeze of lime optional", "\f"], "original": "1 pound chicken breasts cut into bite\nsize pieces\n\n2 tbsp olive oil\n\n2 clove garlic crushed or minced\n\n1 tbsp chili powder\n\n1/2 teaspoon ground cumin\n\n1/4 teaspoon onion or garlic powder\n1/4 teaspoon kosher salt\n\n1 tbsp olive oil\n\nsqueeze of lime optional\n\f"}
+
+og = extracted['original']
 
 def parse_paragraph_to_recipe_line(paragraph):
     paragraph = paragraph.replace("\n", " ").replace("\f", " ").replace("\t", " ")
@@ -80,3 +67,9 @@ def convert_to_qty_units(results: List[str]):
         }
         dataset.append(data)
     return dataset
+
+
+results = parse_paragraph_to_recipe_line(og)
+dataset = convert_to_qty_units(results)
+
+print(dataset, results)
