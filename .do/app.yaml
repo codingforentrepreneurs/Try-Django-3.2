@@ -61,7 +61,7 @@ jobs:
     scope: RUN_TIME
     value: ${db.DATABASE_URL}
   github:
-    branch: production-2
+    branch: production-3
     deploy_on_push: true
     repo: codingforentrepreneurs/Try-Django-3.2
   instance_count: 1
@@ -79,7 +79,7 @@ services:
     scope: RUN_TIME
     value: ${db.DATABASE_URL}
   github:
-    branch: production-2
+    branch: production-3
     deploy_on_push: true
     repo: codingforentrepreneurs/Try-Django-3.2
   http_port: 8080
