@@ -1,0 +1,9 @@
+name: Try Django 3.2
+databases:
+    # fill this out
+services:
+    # fill this out
+jobs:
+    # fill this out
+envs:
+    # fill this out
