@@ -60,9 +60,9 @@ jobs:
   - key: DATABASE_URL
     scope: RUN_TIME
     value: ${db.DATABASE_URL}
-  github:
+  git:
+    repo_clone_url: https://www.github.com/codingforentrepreneurs/Try-Django-3.2
     branch: production-3
-    repo: codingforentrepreneurs/Try-Django-3.2
   instance_count: 1
   instance_size_slug: basic-xxs
   kind: PRE_DEPLOY
@@ -77,9 +77,9 @@ services:
   - key: DATABASE_URL
     scope: RUN_TIME
     value: ${db.DATABASE_URL}
-  github:
+  git:
+    repo_clone_url: https://www.github.com/codingforentrepreneurs/Try-Django-3.2
     branch: production-3
-    repo: codingforentrepreneurs/Try-Django-3.2
   http_port: 8080
   instance_count: 1
   instance_size_slug: basic-xxs
