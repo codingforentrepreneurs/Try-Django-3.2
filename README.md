@@ -44,10 +44,9 @@ git remote set-url origin https://github.com/USERNAME/REPOSITORY.git
 
 8. In `.do/app.yaml` update each instance of
 ```yaml
-github:
+git:
     branch: production-3
-    deploy_on_push: true
-    repo: codingforentrepreneurs/Try-Django-3.2
+    repo_clone_url: https://github.com/codingforentrepreneurs/Try-Django-3.2.git
 ```
 to
 ```yaml
@@ -56,19 +55,53 @@ github:
     deploy_on_push: true
     repo: USERNAME/REPOSITORY
 ```
+9. Update ENV Secrets
+In `.do/app.yaml`, you'll see the `envs` that includes values with the `type: SECRET`. You *must* use a plain-text value when you create this app.
 
-9. Push your code
+So change:
+```yaml
+- key: DJANGO_SECRET_KEY
+  scope: RUN_AND_BUILD_TIME
+  type: SECRET
+  value: EV[1:w8aaS/4qnhOJoLOQW4JnsmcjMQWF9Xfv:ZC08ZkUwFhkEzqXYlgtlwh260FWLbe6Zy+c0dqH4nyaqPFDKNF03wFs4D/51604nC0/xkOfDlHf+ldmkzyEsL68S]
 
 ```
+
+
+To
+```yaml
+  
+- key: DJANGO_SECRET_KEY
+  scope: RUN_AND_BUILD_TIME
+  type: SECRET
+  value: wmu@re-x%d-kql&kzs(wo7@t%icu6d@140e0w!!oh^3q_yaw)w
+```
+- Create one-off secret keys with [this guide](https://www.codingforentrepreneurs.com/blog/create-a-one-off-django-secret-key/)
+
+
+10. Create app with `doctl`
+New to [doctl](https://kirr.co/usaoez)?
+
+```
+doctl apps create --spec .do/app.yaml --context main --format "ID"
+```
+> This will give you an app ID as a response. Something like `78457d4e6-53c2-43e4-afd1-97e701e1ab81`
+
+After it's is complete, we need to replace `.do/app.yaml` to include the encypted keys reference:
+
+
+11. Get App Spec with `doctl`
+```
+doctl apps spec get 78457d4e6-53c2-43e4-afd1-97e701e1ab81 > .do/app.yaml  
+```
+> The `78457d4e6-53c2-43e4-afd1-97e701e1ab81` is the id from the app created in step 10. Need to find the id? Use `doctl apps list --format "Spec.Name, ID"`
+
+
+12. Commit & Push your code
+It's very important that you do step 11 *prior* to commiting any app.yaml code. (It is not important if you do not have keys you'd like to hide)
+
+```
+git add .do/app.yaml
+git commit -m "Updated app.yaml SECRET keys"
 git push origin main
-```
-
-10. Use `doctl`
-
-```
-doctl apps create --spec .do/app.yaml  --context main
-```
-Or, my preferred choice as outlined [here](https://kirr.co/usaoez):
-```
-echo "$(doctl apps create --spec .do/app.yaml  --context main --format ID --no-header)" > app-id.txt 
 ```
