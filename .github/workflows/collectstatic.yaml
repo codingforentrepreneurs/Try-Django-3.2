@@ -27,6 +27,7 @@ jobs:
         run: |
           pip install -r requirements.txt
       - name: Run Collectstatic
+        continue-on-error: true
         env:
           DEBUG: "0"
           DJANGO_SECRET_KEY: CI_CD_TEST_KEY

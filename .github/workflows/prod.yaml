@@ -51,6 +51,16 @@ jobs:
           POSTGRES_PORT: 5432
         run: |
           python manage.py test
+      - name: Run Collectstatic
+        continue-on-error: true
+        env:
+          DEBUG: "0"
+          DJANGO_SECRET_KEY: CI_CD_TEST_KEY
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_STORAGE_BUCKET_NAME: ${{ secrets.AWS_STORAGE_BUCKET_NAME }}
+        run: |
+          python manage.py collectstatic --noinput
       - name: Push Main Branch into Production
         uses: codingforentrepreneurs/action-branch-to-branch@main
         with:
