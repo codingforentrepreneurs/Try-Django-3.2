@@ -13,7 +13,7 @@ envs:
   value: "0"
 - key: DJANGO_ALLOWED_HOST
   scope: RUN_AND_BUILD_TIME
-  value: .ondigitalocean.app
+  value: try-django-3-2-g7hj7.ondigitalocean.app
 - key: DJANGO_SUPERUSER_EMAIL
   scope: RUN_AND_BUILD_TIME
   value: hello@teamcfe.com
@@ -23,11 +23,11 @@ envs:
 - key: DJANGO_SECRET_KEY
   scope: RUN_AND_BUILD_TIME
   type: SECRET
-  value: EV[1:Rz8MwSSaQn0VkKXDBEMhTMXiR65N0ohP:eR2SOxZS1MAX0tAxZTZT3pnjm8Lbiw==]
+  value: EV[1:O4AGkmcqHr7K93v8psaNTowk3gYilqhl:8U3LKjCi/WGpI4fO/82ltGAEh2E/KK2UDS27A0wiDkLRK2pu+CuaszHyUxJxkGgMzeHIvRkrv3+nGaG768wLh96M]
 - key: DJANGO_SUPERUSER_PASSWORD
   scope: RUN_AND_BUILD_TIME
   type: SECRET
-  value: EV[1:0i8eMzIXU2MwDXR5xxZKC1i9bTSo9CzL:9yJjAeQ9LsmFvStZmhexl9Qq0g==]
+  value: EV[1:eI5fSSqZkfLZJCodTkGOPv53aUkW3ksT:4GzeVJ5YSuPKyUhT32q87/2DftIVqliWl30c6jZWWwTMen393vhkxj0JeD5rhjPI42uWZccLMFGNr8XWwb1GXr3N]
 - key: POSTGRES_DB
   scope: RUN_AND_BUILD_TIME
   value: ${db.DATABASE}
@@ -46,11 +46,11 @@ envs:
 - key: AWS_ACCESS_KEY_ID
   scope: RUN_AND_BUILD_TIME
   type: SECRET
-  value: EV[1:XKV7zQkYp/uQIXlBP39akyobcrfAum1R:u/3+lhXHwJiSV8bqvHN6PPdtjQ==]
+  value: EV[1:8tUA4iPz6RXmTBE5JWGCuuVjftuzAUxs:FfHvzQv7V3Wi4lqNX14DLrqPFGrNlNHAXarmTjSBH9pAt9YJ]
 - key: AWS_SECRET_ACCESS_KEY
   scope: RUN_AND_BUILD_TIME
   type: SECRET
-  value: EV[1:cDiSpdR/jNTUIUCahjW52uaZ8GNXaZie:E1mSY5Yc/+ufEpDinis3RoMnMQ==]
+  value: EV[1:kfGInyKA+O218USZE4tqrS90hAOUWNvY:3oTK1Q7GSLEYRzBqnhH0IiTNiDsVu/fZcToRtNfSI65I8urcKdbgd4zGirJ1bb7/89SbQjO2teq0zLI=]
 - key: AWS_STORAGE_BUCKET_NAME
   scope: RUN_AND_BUILD_TIME
   value: trydjango3
@@ -62,7 +62,6 @@ jobs:
     value: ${db.DATABASE_URL}
   github:
     branch: production-3
-    deploy_on_push: true
     repo: codingforentrepreneurs/Try-Django-3.2
   instance_count: 1
   instance_size_slug: basic-xxs
@@ -70,7 +69,7 @@ jobs:
   name: django-migrate-job
   run_command: python manage.py migrate --noinput
   source_dir: /
-name: try-django-32-via-cli
+name: try-django-3-2
 region: nyc
 services:
 - environment_slug: python
@@ -80,7 +79,6 @@ services:
     value: ${db.DATABASE_URL}
   github:
     branch: production-3
-    deploy_on_push: true
     repo: codingforentrepreneurs/Try-Django-3.2
   http_port: 8080
   instance_count: 1
