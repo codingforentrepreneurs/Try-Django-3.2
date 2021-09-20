@@ -14,4 +14,60 @@ Reference code
 - [Basic HTML / CSS](https://www.codingforentrepreneurs.com/projects/getting-started-html-css/)
 - Python experience such as [30 Days of Python](https://www.codingforentrepreneurs.com/projects/30-days-python-38)
 
-### Coming Soon
+
+### Deployment
+
+#### Using [doctl](https://kirr.co/usaoez)
+1. Reference Post - https://kirr.co/usaoez
+
+2. Sign up for DigitalOcean - https://do.co/cfe-youtube
+
+3. Install doctl - https://kirr.co/dxcc48
+
+4. Get API Token - https://kirr.co/7x8r90
+
+5. Install the new token with:
+```
+doctl auth init --context main
+```
+`--context main` is intensional here (it's used later).
+
+6. Clone Repo
+
+```
+git clone https://github.com/codingforentrepreneurs/Try-Django-3.2
+```
+7. Change to your remote
+```
+git remote set-url origin https://github.com/USERNAME/REPOSITORY.git
+```
+
+8. In `.do/app.yaml` update each instance of
+```yaml
+github:
+    branch: production-3
+    deploy_on_push: true
+    repo: codingforentrepreneurs/Try-Django-3.2
+```
+to
+```yaml
+github:
+    branch: production-3
+    deploy_on_push: true
+    repo: USERNAME/REPOSITORY
+```
+
+9. Push your code
+
+```
+git push origin main
+```
+
+10. Use `doctl`
+
+```
+doctl apps create --spec .do/app.yaml  --context main
+```
+Or, my preferred choice as outlined [here](https://kirr.co/usaoez):
+```
+echo "$(doctl apps create --spec .do/app.yaml  --context main --format ID --no-header)" > app-id.txt 
