@@ -71,3 +71,4 @@ doctl apps create --spec .do/app.yaml  --context main
 Or, my preferred choice as outlined [here](https://kirr.co/usaoez):
 ```
 echo "$(doctl apps create --spec .do/app.yaml  --context main --format ID --no-header)" > app-id.txt 
+```

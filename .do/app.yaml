@@ -1,9 +1,92 @@
-name: Try Django 3.2
 databases:
-    # fill this out
-services:
-    # fill this out
-jobs:
-    # fill this out
+- engine: PG
+  name: db
+  num_nodes: 1
+  size: db-s-dev-database
+  version: "12"
 envs:
-    # fill this out
+- key: DISABLE_COLLECTSTATIC
+  scope: RUN_AND_BUILD_TIME
+  value: "1"
+- key: DEBUG
+  scope: RUN_AND_BUILD_TIME
+  value: "0"
+- key: DJANGO_ALLOWED_HOST
+  scope: RUN_AND_BUILD_TIME
+  value: .ondigitalocean.app
+- key: DJANGO_SUPERUSER_EMAIL
+  scope: RUN_AND_BUILD_TIME
+  value: hello@teamcfe.com
+- key: DJANGO_SUPERUSER_USERNAME
+  scope: RUN_AND_BUILD_TIME
+  value: cfe
+- key: DJANGO_SECRET_KEY
+  scope: RUN_AND_BUILD_TIME
+  type: SECRET
+  value: EV[1:Rz8MwSSaQn0VkKXDBEMhTMXiR65N0ohP:eR2SOxZS1MAX0tAxZTZT3pnjm8Lbiw==]
+- key: DJANGO_SUPERUSER_PASSWORD
+  scope: RUN_AND_BUILD_TIME
+  type: SECRET
+  value: EV[1:0i8eMzIXU2MwDXR5xxZKC1i9bTSo9CzL:9yJjAeQ9LsmFvStZmhexl9Qq0g==]
+- key: POSTGRES_DB
+  scope: RUN_AND_BUILD_TIME
+  value: ${db.DATABASE}
+- key: POSTGRES_HOST
+  scope: RUN_AND_BUILD_TIME
+  value: ${db.HOSTNAME}
+- key: POSTGRES_USER
+  scope: RUN_AND_BUILD_TIME
+  value: ${db.USERNAME}
+- key: POSTGRES_PASSWORD
+  scope: RUN_AND_BUILD_TIME
+  value: ${db.PASSWORD}
+- key: POSTGRES_PORT
+  scope: RUN_AND_BUILD_TIME
+  value: ${db.PORT}
+- key: AWS_ACCESS_KEY_ID
+  scope: RUN_AND_BUILD_TIME
+  type: SECRET
+  value: EV[1:XKV7zQkYp/uQIXlBP39akyobcrfAum1R:u/3+lhXHwJiSV8bqvHN6PPdtjQ==]
+- key: AWS_SECRET_ACCESS_KEY
+  scope: RUN_AND_BUILD_TIME
+  type: SECRET
+  value: EV[1:cDiSpdR/jNTUIUCahjW52uaZ8GNXaZie:E1mSY5Yc/+ufEpDinis3RoMnMQ==]
+- key: AWS_STORAGE_BUCKET_NAME
+  scope: RUN_AND_BUILD_TIME
+  value: trydjango3
+jobs:
+- environment_slug: python
+  envs:
+  - key: DATABASE_URL
+    scope: RUN_TIME
+    value: ${db.DATABASE_URL}
+  github:
+    branch: production-2
+    deploy_on_push: true
+    repo: codingforentrepreneurs/Try-Django-3.2
+  instance_count: 1
+  instance_size_slug: basic-xxs
+  kind: PRE_DEPLOY
+  name: django-migrate-job
+  run_command: python manage.py migrate --noinput
+  source_dir: /
+name: try-django-32-via-cli
+region: nyc
+services:
+- environment_slug: python
+  envs:
+  - key: DATABASE_URL
+    scope: RUN_TIME
+    value: ${db.DATABASE_URL}
+  github:
+    branch: production-2
+    deploy_on_push: true
+    repo: codingforentrepreneurs/Try-Django-3.2
+  http_port: 8080
+  instance_count: 1
+  instance_size_slug: basic-xxs
+  name: try-django-3-2
+  routes:
+  - path: /
+  run_command: gunicorn --worker-tmp-dir /dev/shm trydjango.wsgi
+  source_dir: /
