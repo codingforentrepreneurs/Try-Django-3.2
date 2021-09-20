@@ -46,14 +46,14 @@ envs:
 - key: AWS_ACCESS_KEY_ID
   scope: RUN_AND_BUILD_TIME
   type: SECRET
-  value: EV[1:7JsrAKpwlfvhbfaiC8UaPTDOr8TSvpBK:hyympgRPPOwiZhaJv58HROiD]
+  value: EV[1:MvVp4xFdM2EpA5q/NrOF4/0lNMoh/ZXE:E63UbQTTyx9eVTb7nS5D14m/e8K7a+3xt8d9xDV7v82KBImy]
 - key: AWS_SECRET_ACCESS_KEY
   scope: RUN_AND_BUILD_TIME
   type: SECRET
-  value: EV[1:bRERF88HR/u6/a/Rcq/MVTFlwvhznA9H:f5cDwYpvvylysL9vPV/2fa5Edw==]
+  value: EV[1:7m7Qtz9CU81/yRLPx/e/8yv0pMXbvSEc:f6iprDbF7oFPdo1tjTADVm28+gih9LehaGJaKRnSeIYXPGysfU6aM58YU8S+wIcnJxPw4NZdXyqcex4=]
 - key: AWS_STORAGE_BUCKET_NAME
   scope: RUN_AND_BUILD_TIME
-  value: trydjango
+  value: trydjango32
 jobs:
 - environment_slug: python
   envs:
@@ -88,4 +88,3 @@ services:
   - path: /
   run_command: gunicorn --worker-tmp-dir /dev/shm trydjango.wsgi
   source_dir: /
-
