@@ -24,7 +24,7 @@ urlpatterns = [
     path("hx/<int:parent_id>/ingredient/", recipe_ingredient_update_hx_view, name='hx-ingredient-create'),
     path("hx/<int:id>/", recipe_detail_hx_view, name='hx-detail'),
     
-    path("<int:parent_id>/image-upload/", recipe_ingredient_image_upload_view),
+    path("<int:parent_id>/image-upload/", recipe_ingredient_image_upload_view, name='recipe-ingredient-image-upload'),
     path("<int:parent_id>/ingredient/<int:id>/delete/", recipe_incredient_delete_view, name='ingredient-delete'),
     path("<int:id>/delete/", recipe_delete_view, name='delete'),
     path("<int:id>/edit/", recipe_update_view, name='update'),

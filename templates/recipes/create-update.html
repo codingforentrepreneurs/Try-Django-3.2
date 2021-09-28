@@ -20,6 +20,8 @@
             {% include 'recipes/partials/ingredient-inline.html' with object=ingredient %}
     {% endfor %}
     {% if new_ingredient_url %}
+    <div hx-get="{{ object.get_image_upload_url }}" hx-trigger='revealed'></div>
+
     <div id='ingredient-create'>
         
     </div>

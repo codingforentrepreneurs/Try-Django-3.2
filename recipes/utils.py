@@ -65,18 +65,27 @@ def convert_to_qty_units(results: List[str]):
                 continue
             iter_unit = None
             try:
-                iter_unit = str(ureg[word].units)
+                iter_unit = str(ureg[word.lower()].units)
             except:
                 pass
             if units is None and iter_unit is not None:
                 units = iter_unit
             else:
                 other.append(word)
+        name = ""
+        other_txt = " ".join(other)
+        description = None
+        if len(other_txt) < 220:
+            name = other_txt
+        elif len(other_txt) >= 220:
+            name = other_txt[:220]
+            description = other_txt[220:]
         data = {
-            "qty": qty,
-            "qty_raw": qty_raw,
+            "quantity_as_float": qty,
+            "quantity": qty_raw,
             "unit": units,
-            "other": " ".join(other)
+            "name": name,
+            "description": description,
         }
         dataset.append(data)
     return dataset

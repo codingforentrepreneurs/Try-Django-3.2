@@ -2,14 +2,19 @@
 <form id='image-upload-form' action='.' method="POST" enctype="multipart/form-data"
 hx-post="{{ request.path }}"
 hx-encoding="multipart/form-data"
-
+hx-trigger="change from:#id_image"
 >
     {% csrf_token %}
+
+    <div class='htmx-inverted-indicator'>
     {{ form.as_p }}
-    <div>
+</div>
+
+    <div class='htmx-indicator'>Loading...</div>
+    <div style='display:none'>
         <progress id='image-upload-progress' value='0' max='100'></progress>
     </div>
-<button style='margin-top:10px;' type='submit' >Upload Image</button>
+<button style='display:none' style='margin-top:10px;' type='submit' >Upload Image</button>
 </form>
 
 <script>
