@@ -12,24 +12,33 @@
     }
 </style>
 
-<div style='margin-top:30px;'>
-    {% include 'recipes/partials/forms.html' %}
+<div class='row'>
+        <div class='{% if object.id %}col-12 col-md-8 {% else %} col-md-6 mx-auto {% endif %}'>
+            {% if not object.id %}
+                <h1>Create Recipe</h1>
+            {% endif %}
 
-    <h3>Ingredients</h3>
-    {% for ingredient in object.get_ingredients_children %}
-            {% include 'recipes/partials/ingredient-inline.html' with object=ingredient %}
-    {% endfor %}
-    {% if new_ingredient_url %}
-    <div hx-get="{{ object.get_image_upload_url }}" hx-trigger='revealed'></div>
 
-    <div id='ingredient-create'>
-        
-    </div>
+            {% include 'recipes/partials/forms.html' %}
+        </div>
 
-    <button hx-get="{{ new_ingredient_url }}" hx-trigger='click'
-        hx-target='#ingredient-create' hx-swap='beforeend'>Add ingredient</button>
+        <div class='{% if object.id %}col-12 col-md-4 {% else %} d-none {% endif %}'>
+            <h3>Ingredients</h3>
+            {% for ingredient in object.get_ingredients_children %}
+                    {% include 'recipes/partials/ingredient-inline.html' with object=ingredient %}
+            {% endfor %}
+            {% if new_ingredient_url %}
+            <div hx-get="{{ object.get_image_upload_url }}" hx-trigger='revealed'></div>
 
-    {% endif %}
+            <div id='ingredient-create'>
+                
+            </div>
+
+            <button hx-get="{{ new_ingredient_url }}" hx-trigger='click'
+                hx-target='#ingredient-create' hx-swap='beforeend'>Add ingredient</button>
+
+            {% endif %}
+        </div>
 </div>
 
 <script>
