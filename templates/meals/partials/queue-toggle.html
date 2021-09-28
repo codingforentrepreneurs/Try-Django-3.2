@@ -1,0 +1,12 @@
+<form 
+    action='.'
+    method="POST" 
+    enctype="multipart/form-data"
+    hx-post='{% url "meal-toggle" recipe_id=recipe_id %}'
+    hx-encoding="multipart/form-data"
+>
+    {% csrf_token %}
+
+
+<button type='submit' class='btn {% if is_pending %} btn-outline-secondary  {% else %} btn-primary {% endif %}'>{{ toggle_label }}</button>
+</form>
