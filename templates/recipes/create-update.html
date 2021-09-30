@@ -24,18 +24,17 @@
 
         <div class='{% if object.id %}col-12 col-md-4 {% else %} d-none {% endif %}'>
             <h3>Ingredients</h3>
+            
+            <div id='ingredients-list'>
             {% for ingredient in object.get_ingredients_children %}
                     {% include 'recipes/partials/ingredient-inline.html' with object=ingredient %}
             {% endfor %}
-            {% if new_ingredient_url %}
-            <div hx-get="{{ object.get_image_upload_url }}" hx-trigger='revealed'></div>
-
-            <div id='ingredient-create'>
-                
             </div>
-
+            
+            {% if new_ingredient_url %}
+            <div hx-get="{{ object.get_image_upload_url }}" hx-trigger='revealed'></div>               
             <button hx-get="{{ new_ingredient_url }}" hx-trigger='click'
-                hx-target='#ingredient-create' hx-swap='beforeend'>Add ingredient</button>
+                hx-target='#ingredients-list' hx-swap='beforeend'>Add ingredient</button>
 
             {% endif %}
         </div>
