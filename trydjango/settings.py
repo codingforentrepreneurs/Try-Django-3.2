@@ -25,8 +25,7 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 DEBUG = str(os.environ.get('DEBUG')) == "1" # 1 == True
 
 ENV_ALLOWED_HOST = os.environ.get('DJANGO_ALLOWED_HOST') or None
-ALLOWED_HOSTS = os.environ.get('DJANGO_ALLOWED_HOST')
-# seashell-app-o5hbc.ondigitalocean.app
+ALLOWED_HOSTS = 'seashell-app-o5hbc.ondigitalocean.app'
 #if not DEBUG:
 #    ALLOWED_HOSTS += [os.environ.get('DJANGO_ALLOWED_HOST')]
 
