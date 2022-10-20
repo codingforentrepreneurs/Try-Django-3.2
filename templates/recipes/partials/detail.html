@@ -1,0 +1,40 @@
+<div class='row'>
+    <div class='col-12 col-md-8'>
+
+
+<h1>{{ object.name }}</h1>
+{% if object.get_edit_url %}
+<small>
+    <a href='{{ object.get_edit_url }}'>Edit</a> 
+    <a href='{{ object.get_delete_url }}' hx-post='{{ object.get_delete_url }}' hx-confirm='Are you sure you want to delete {{ object.name }}?' hx-trigger='click'
+    >Delete</a> 
+</small>
+
+
+{% endif %}
+<p>{{ object.description }}</p>
+<p>{{ object.directions }}</p>
+
+
+</div>
+<div class='col-12 col-md-4'>
+
+
+{% for ingredient in object.get_ingredients_children %}
+{% include 'recipes/partials/ingredient-inline.html' with object=ingredient %}
+
+{% endfor %}
+
+
+<div hx-get="{{ object.get_image_upload_url }}" hx-trigger='revealed'></div>
+
+            <div id='ingredient-create'>
+                
+            </div>
+
+            <button hx-get="{{ new_ingredient_url }}" hx-trigger='click'
+                hx-target='#ingredient-create' hx-swap='beforeend'>Add ingredient</button>
+
+
+            </div>
+        </div>

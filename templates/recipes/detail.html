@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+<div hx-get='{{ hx_url }}' hx-trigger='revealed'>
+    <div class='htmx-indicator'>Loading...</div>
+</div>
+
+{% endblock content %}

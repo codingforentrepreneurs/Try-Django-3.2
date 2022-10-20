@@ -1,0 +1,97 @@
+databases:
+- engine: PG
+  name: db
+  num_nodes: 1
+  size: db-s-dev-database
+  version: "12"
+envs:
+- key: DISABLE_COLLECTSTATIC
+  scope: RUN_AND_BUILD_TIME
+  value: "1"
+- key: DEBUG
+  scope: RUN_AND_BUILD_TIME
+  value: "0"
+- key: DJANGO_ALLOWED_HOST
+  scope: RUN_AND_BUILD_TIME
+  value: .ondigitalocean.app
+- key: DJANGO_SUPERUSER_EMAIL
+  scope: RUN_AND_BUILD_TIME
+  value: hello@teamcfe.com
+- key: DJANGO_SUPERUSER_USERNAME
+  scope: RUN_AND_BUILD_TIME
+  value: cfe
+- key: DJANGO_SECRET_KEY
+  scope: RUN_AND_BUILD_TIME
+  type: SECRET
+  value: EV[1:w8aaS/4qnhOJoLOQW4JnsmcjMQWF9Xfv:ZC08ZkUwFhkEzqXYlgtlwh260FWLbe6Zy+c0dqH4nyaqPFDKNF03wFs4D/51604nC0/xkOfDlHf+ldmkzyEsL68S]
+- key: DJANGO_SUPERUSER_PASSWORD
+  scope: RUN_AND_BUILD_TIME
+  type: SECRET
+  value: EV[1:O3RwT5emlMu5NlM0wjtqMug22+ojOpid:g/J7lCHyfbL1rdkRTKjLNG6irSM93bZR09h/riIykQw1pCULIsmPCGmWd2S2oxA5dwrRIhAx43UnMw==]
+- key: POSTGRES_DB
+  scope: RUN_AND_BUILD_TIME
+  value: ${db.DATABASE}
+- key: POSTGRES_HOST
+  scope: RUN_AND_BUILD_TIME
+  value: ${db.HOSTNAME}
+- key: POSTGRES_USER
+  scope: RUN_AND_BUILD_TIME
+  value: ${db.USERNAME}
+- key: POSTGRES_PASSWORD
+  scope: RUN_AND_BUILD_TIME
+  value: ${db.PASSWORD}
+- key: POSTGRES_PORT
+  scope: RUN_AND_BUILD_TIME
+  value: ${db.PORT}
+- key: AWS_ACCESS_KEY_ID
+  scope: RUN_AND_BUILD_TIME
+  type: SECRET
+  value: EV[1:MvVp4xFdM2EpA5q/NrOF4/0lNMoh/ZXE:E63UbQTTyx9eVTb7nS5D14m/e8K7a+3xt8d9xDV7v82KBImy]
+- key: AWS_SECRET_ACCESS_KEY
+  scope: RUN_AND_BUILD_TIME
+  type: SECRET
+  value: EV[1:7m7Qtz9CU81/yRLPx/e/8yv0pMXbvSEc:f6iprDbF7oFPdo1tjTADVm28+gih9LehaGJaKRnSeIYXPGysfU6aM58YU8S+wIcnJxPw4NZdXyqcex4=]
+- key: AWS_STORAGE_BUCKET_NAME
+  scope: RUN_AND_BUILD_TIME
+  value: trydjango32
+- key: OCR_API_TOKEN_HEADER
+  scope: RUN_AND_BUILD_TIME
+  type: SECRET
+  value: EV[1:SjjuB8C+3JScJkhDe6NFYOS19d04Iiw/:LGp9KjNKfBdfHoAZjiVqSmREXLK65XwR/RIFgZYwFi98ayV3ySuQj6je7vNyjPpFzc7RKl4raCmoTvw=]
+- key: OCR_API_ENDPOINT
+  scope: RUN_AND_BUILD_TIME
+  value: https://fastapi-microservice-for-django-d3kjd.ondigitalocean.app
+jobs:
+- environment_slug: python
+  envs:
+  - key: DATABASE_URL
+    scope: RUN_TIME
+    value: ${db.DATABASE_URL}
+  git:
+    branch: production-3
+    repo_clone_url: https://github.com/codingforentrepreneurs/Try-Django-3.2.git
+  instance_count: 1
+  instance_size_slug: basic-xxs
+  kind: PRE_DEPLOY
+  name: django-migrate-job
+  run_command: python manage.py migrate --noinput
+  source_dir: /
+name: try-django-3-2
+region: nyc
+services:
+- environment_slug: python
+  envs:
+  - key: DATABASE_URL
+    scope: RUN_TIME
+    value: ${db.DATABASE_URL}
+  git:
+    branch: production-3
+    repo_clone_url: https://github.com/codingforentrepreneurs/Try-Django-3.2.git
+  http_port: 8080
+  instance_count: 1
+  instance_size_slug: basic-xxs
+  name: try-django-3-2
+  routes:
+  - path: /
+  run_command: gunicorn --worker-tmp-dir /dev/shm trydjango.wsgi
+  source_dir: /

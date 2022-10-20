@@ -3,9 +3,16 @@
 
 {% block content %}
 
-{% if object %}
-<h1>{{ object.title }}</h1>
-<p>{{ object.content }}</p>
-{% endif %}
+<ol>
+{% for object in object_list %}
+    {% if object.title %}
+    <li>
+        <a href="{{ object.get_absolute_url }}">
+            {{ object.title }}
+        </a>
+    </li>
+    {% endif %}
+{% endfor %}
+</ol>
 
 {% endblock content %}

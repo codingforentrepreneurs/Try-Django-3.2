@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>My Recipes</h1>
+<h3><a href='{% url "recipes:create" %}'>Add Recipe</a></h3>
+<hr/>
+{% for x in object_list %}
+        <div class='mb-3'>
+            <a class='lead' href='{{ x.get_absolute_url }}'>{{ x.name }}</a>
+            <div hx-get='{% url "meal-toggle" recipe_id=x.id %}' hx-trigger='revealed'></div>
+    </div>
+    {% endfor %}
+
+{% endblock content %}
