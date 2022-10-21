@@ -14,6 +14,7 @@ Reference code
 - [Basic HTML / CSS](https://www.codingforentrepreneurs.com/projects/getting-started-html-css/)
 - Python experience such as [30 Days of Python](https://www.codingforentrepreneurs.com/projects/30-days-python-38)
 
+### Need help? Found a bug? Use [discussions](https://github.com/codingforentrepreneurs/Try-Django-3.2/discussions)!
 
 ### Deployment
 
