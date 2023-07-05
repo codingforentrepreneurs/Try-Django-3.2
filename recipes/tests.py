@@ -93,8 +93,8 @@ class RecipeTestCase(TestCase):
 
     def test_unit_measure_validation_error(self):
         invalid_units = ['nada', 'asdfadsf']
-        with self.assertRaises(ValidationError):
-            for unit in invalid_units:
+        for unit in invalid_units:
+            with self.assertRaises(ValidationError):
                 ingredient = RecipeIngredient(
                     name='New',
                     quantity=10,
