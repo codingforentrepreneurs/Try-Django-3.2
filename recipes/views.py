@@ -57,7 +57,7 @@ def recipe_delete_view(request, id=None):
 
 
 @login_required
-def recipe_incredient_delete_view(request, parent_id=None, id=None):
+def recipe_ingredient_delete_view(request, parent_id=None, id=None):
     try:
         obj = RecipeIngredient.objects.get(recipe__id=parent_id, id=id, recipe__user=request.user)
     except:
